@@ -23,7 +23,8 @@ int main()
                 {
                     printf("\nIm child1 and my PID:%d",getpid());
                     printf("\nIm child1 and my PPID:%d",getppid());
-                    printf("\nIm child1 and my value in variable value1 is:%d\n",value1);
+                    printf("\nIm child1 and my value in variable 
+					value1 is:%d\n",value1);
                 }
                 else//PARENT1
                 {
@@ -39,7 +40,8 @@ int main()
             {
                 printf("\nIm Child2 and my PID:%d",getpid());
                 printf("\nIm Child2 and my PPID:%d",getppid());
-                printf("\nIm Child2 and my value in the variable value2 is:%d\n",value2);
+                printf("\nIm Child2 and my value in the variable value2 is
+				:%d\n",value2);
 
                 pid_t child3,child4;
                 child3 = fork(); //Creating Child3 and Parent 3
@@ -50,7 +52,8 @@ int main()
                     {
                         printf("\nI am child3 and my PID is:%d",getpid());
                         printf("\nI am child3 and my PPID is:%d",getppid());
-                        printf("\nI am child3 and my value in the variable is:%d\n",child3);
+                        printf("\nI am child3 and my value in the variable
+						 is:%d\n",child3);
                     }
                     else//PARENT3
                     {
@@ -69,7 +72,8 @@ int main()
                     {
                         printf("\nI am child4 and my PID is:%d",getpid());
                         printf("\nI am child4 and my PPID is:%d",getppid());
-                        printf("\nI am child4 and my value in variable child4 is:%d\n",child4);
+                        printf("\nI am child4 and my value in variable child4 
+						is:%d\n",child4);
                     }
                     else//PARENT4
                     {
