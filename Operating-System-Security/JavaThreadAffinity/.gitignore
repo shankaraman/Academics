@@ -1,0 +1,5 @@
+*.class
+*.dylib
+*.so
+*.c~
+bin/*
