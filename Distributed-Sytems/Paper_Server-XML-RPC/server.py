@@ -2,11 +2,11 @@ import SimpleXMLRPCServer
 import os,sys
 import hashlib,random
 
+"""
 
-# Removes the directory named files and creates a new directory named 'files'
+    Please create a directory named files where you have copied the client and server program
 
-os.system("rm -r files")
-os.mkdir("files")
+"""
 
 # Global Variables
 
@@ -16,19 +16,16 @@ count = 0 # Whether to update or add values to dictionary
 
 class PaperServer:
 
-"""    
-    Lists the contents inside the "files" folder
-    Returns the unique string with author name and title of a paper
-"""
+ 
+    # Lists the contents inside the "files" folder
+    # Returns the unique string with author name and title of a paper
     def list(self):
         global dictionary
         return str("Author: "+dictionary.values()[0][0]+"\nTitle: "+dictionary.values()[0][1]+"\nUnique id: "+str(dictionary.keys()).strip("[]''"))
 
-"""
     # Stores the file under the "files" folder
     # Stores the author name and title
     # Generates a unique string for a given file
-"""
 
     def server_receive_file(self,arg,author_name,paper_title,file_name):
         global count,dictionary,session_list
