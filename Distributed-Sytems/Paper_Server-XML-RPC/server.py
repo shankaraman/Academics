@@ -21,10 +21,8 @@ class PaperServer:
     Returns the unique string with author name and title of a paper
 """
     def list(self):
-        global count,dictionary,session_list
-        output = os.popen("ls files/").readlines()
-        data = ' '.join(output)
-        return str("Author:"+dictionary.values()[0][0]+"\nTitle"+dictionary.values()[0][1]+"\nUnique id:"+str(dictionary.keys()).strip("[]''"))
+        global dictionary
+        return str("Author: "+dictionary.values()[0][0]+"\nTitle: "+dictionary.values()[0][1]+"\nUnique id: "+str(dictionary.keys()).strip("[]''"))
 
 """
     # Stores the file under the "files" folder
