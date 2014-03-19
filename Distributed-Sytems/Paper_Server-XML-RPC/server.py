@@ -63,7 +63,8 @@ class PaperServer:
         fd = open(dictionary[uid][2],"rb")
         data = fd.readlines()
         return str(data).strip("[]")
-    
+
 server = SimpleXMLRPCServer.SimpleXMLRPCServer(("localhost",8000))
 server.register_instance(PaperServer())
+print "Waiting for the client..."
 server.serve_forever()
