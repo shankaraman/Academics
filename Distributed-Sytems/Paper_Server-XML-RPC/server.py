@@ -1,12 +1,6 @@
 import SimpleXMLRPCServer
 import os,sys
-import hashlib,random
-
-"""
-
-    Please create a directory named files where you have copied the client and server program
-
-"""
+import hashlib
 
 # Global Variables
 
@@ -15,15 +9,14 @@ dictionary = {}
 count = 0 # Whether to update or add values to dictionary
 
 class PaperServer:
-
- 
-    # Lists the contents inside the "files" folder
+   
     # Returns the unique string with author name and title of a paper
+
     def list(self):
         global dictionary
-        return str("Author: "+dictionary.values()[0][0]+"\nTitle: "+dictionary.values()[0][1]+"\nUnique id: "+str(dictionary.keys()).strip("[]''"))
+        return dictionary
 
-    # Stores the file under the "files" folder
+    # Stores the file under the 'files' folder
     # Stores the author name and title
     # Generates a unique string for a given file
 
@@ -41,9 +34,15 @@ class PaperServer:
             session_list.append(paper_title)
             session_list.append(file_name)
             dictionary = {uid:session_list}
+            print dictionary
+            session_list = []
         else:
-            session_list = lst
+            session_list.append(author_name)
+            session_list.append(paper_title)
+            session_list.append(file_name)
             dictionary.update({uid:session_list})
+            print dictionary
+            session_list = []
         return True
 
     """
@@ -61,7 +60,7 @@ class PaperServer:
     """
 
     def print_file_contents(self,uid):
-        fd = open(dictionary.values()[0][2],"rb")
+        fd = open(dictionary[uid][2],"rb")
         data = fd.readlines()
         return str(data).strip("[]")
     
