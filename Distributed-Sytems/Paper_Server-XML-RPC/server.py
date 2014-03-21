@@ -34,14 +34,12 @@ class PaperServer:
             session_list.append(paper_title)
             session_list.append(file_name)
             dictionary = {uid:session_list}
-            print dictionary
             session_list = []
         else:
             session_list.append(author_name)
             session_list.append(paper_title)
             session_list.append(file_name)
             dictionary.update({uid:session_list})
-            print dictionary
             session_list = []
         return True
 
