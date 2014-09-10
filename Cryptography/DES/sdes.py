@@ -134,11 +134,11 @@ class SDES_ENC(SDES_KEY):
     
 #Main
 # Get user inputs
-#plain,key = raw_input("Enter the plain text:"),raw_input("Enter the key:")
+plain,key = raw_input("Enter the 8 bit plain text:"),raw_input("Enter the 10 bit key:")
 obj1,obj2 = SDES_KEY(),SDES_ENC()
 # Computes the KEYS
-obj1.KEY_P10("1100011110")
+obj1.KEY_P10(key)
 # Encrypts the Plain text
-final_result = obj2.main("00101000")
+final_result = obj2.main(plain)
 #print "The key given for encryption:",key
 print "Encrypted text:",final_result
