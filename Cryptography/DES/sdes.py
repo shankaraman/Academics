@@ -2,7 +2,7 @@ import sys
 class SDES_KEY:
 
     # Since we are going to use KEY_1 and KEY_2 throughout the program, we are defining in
-    # a constructor so that the variables defined, can be accessed from other calsses
+    # a constructor so that the variables defined here, can be accessed from other calsses
     def __init__(self):
         SDES_KEY.KEY_1 = ""
         SDES_KEY.KEY_2 = ""
@@ -66,9 +66,13 @@ class SDES_ENC(SDES_KEY):
         row,col = int((left[0]+left[3]),2),int((left[1]+left[2]),2)
         # Performs the binary conversion of the S0 table value.
         S0_result = "{0:b}".format(S0[row][col]) 
+        if len(S0_result) == 1:
+            S0_result = "0"+S0_result
         # Performs the binary conversion of the S1 table value.
         row,col = int((right[0]+right[3]),2),int((right[1]+right[2]),2)
         S1_result = "{0:b}".format(S1[row][col])
+        if len(S1_result) == 1:
+            S1_result = "0"+S1_result
         # Passes back to IP to compute P4.
         return (S0_result+S1_result)
     
@@ -83,6 +87,13 @@ class SDES_ENC(SDES_KEY):
         for i in table:
             mapped+=text[i-1]
         return mapped
+
+    def IP_INVERSE(self,text):
+        table,mapped = [4,1,3,5,7,2,8,6],''
+        for i in table:
+            mapped+=text[i-1]
+        return mapped
+
 
     def main(self,text):
         mapped = self.IP(text)
@@ -105,11 +116,29 @@ class SDES_ENC(SDES_KEY):
         XOR = self.xor(P4_result,left1)
         # Now concatenate right1 and above XOR's result
         R1_XOR = right1+XOR
-        print R1_XOR
+        # Computing the E/P string for the right half of R1_XOR
+        EP_right = self.EP(R1_XOR[len(R1_XOR)/2:])
+        # Xoring the EP_right with KEY2
+        EP_K2 = self.xor(SDES_KEY.KEY_2,EP_right)
+        # Splitting EP_K2 into 2 halves for computing SBOX.
+        left3,right3 = EP_K2[:len(EP_K2)/2],EP_K2[len(EP_K2)/2:]
+        # Computing the SBOX mapping for the EP_K2 and computing P4
+        S_BOX_result = self.S_BOX(left3,right3)
+        P4_result = self.P4(S_BOX_result)
+        # Xoring the P4_result and R1_XOR's left half
+        XOR = self.xor(P4_result,R1_XOR[:len(R1_XOR)/2])
+        # Calculating IP inverse by giving XOR and R1_XOR's right half
+        IPInverse = self.IP_INVERSE(XOR+R1_XOR[len(R1_XOR)/2:])
+        return IPInverse
+
     
 #Main
+# Get user inputs
+#plain,key = raw_input("Enter the plain text:"),raw_input("Enter the key:")
 obj1,obj2 = SDES_KEY(),SDES_ENC()
 # Computes the KEYS
-obj1.KEY_P10("1010000010")
+obj1.KEY_P10("1100011110")
 # Encrypts the Plain text
-obj2.main("01110010")
+final_result = obj2.main("00101000")
+#print "The key given for encryption:",key
+print "Encrypted text:",final_result
