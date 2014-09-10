@@ -1,4 +1,3 @@
-import sys
 class SDES_KEY:
 
     # Since we are going to use KEY_1 and KEY_2 throughout the program, we are defining in
