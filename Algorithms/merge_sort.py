@@ -1,3 +1,4 @@
+import random
 def Merge(left, right, array):
     left_size, right_size = len(left), len(right)
     i = j = k = 0
@@ -33,8 +34,12 @@ def MergeSort(array):
     MergeSort(left_array) 
     MergeSort(right_array)
     Merge(left_array, right_array, array)
-    print array
+    return array
 
 
 #Main
-MergeSort([2,4,1,6,8,5,22,66,3,4,5,99,3,7,9])
+random_numbers = []
+for i in range(1000000):
+    random_numbers.append(random.randint(0,i))
+sorted_numbers = MergeSort(random_numbers)
+#print sorted_numbers

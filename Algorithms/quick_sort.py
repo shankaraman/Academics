@@ -1,30 +1,31 @@
+import random,os
 class Quicksort:
     def Partition(self,array,start,end):
         # Assigning last element of the array as pivot
-        pivot,pIndex = array[end],array[start]
-        i = start
-        while i < end:
+        pivot,pIndex = array[end],start
+        # Push all the elements which are less than pivot to left
+        for i in range(start,end):
             if array[i] <= pivot:
                 array[i],array[pIndex] = array[pIndex],array[i]
                 pIndex+=1
-            i+=1
-        if pIndex != len(array):
-            array[pIndex],array[end] = array[end],array[pIndex]
-            print pInde
-            return pIndex
+        # Swap the pivot to the appropriate position
+        array[pIndex],array[end] = array[end],array[pIndex]
+        return pIndex
 
     def Quick(self,array,start,end):
-        print start,end
         if start < end:
             pIndex = self.Partition(array,start,end)
-            print pIndex
             # Left of Pivot
-            Quick(array,start,pIndex-1)
+            self.Quick(array,start,pIndex-1)
             # Right of Pivot
-            Quick(array,pIndex+1,end)
-        print array
+            self.Quick(array,pIndex+1,end)
+            return array
 
 # Main
 obj = Quicksort()
-lst = [9,7,5,55,1,2,4,5,33,66,6,2,22]
-obj.Quick(lst,0,len(lst)-1)
+random_numbers = []
+for i in range(1000000):
+    random_numbers.append(random.randint(0,i))
+#print random_numbers
+sorted_lst = obj.Quick(random_numbers,0,len(random_numbers)-1)
+#print sorted_lst
