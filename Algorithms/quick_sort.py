@@ -1,4 +1,4 @@
-import random,os
+import random
 class Quicksort:
     def Partition(self,array,start,end):
         # Assigning last element of the array as pivot
@@ -28,4 +28,5 @@ for i in range(1000000):
     random_numbers.append(random.randint(0,i))
 #print random_numbers
 sorted_lst = obj.Quick(random_numbers,0,len(random_numbers)-1)
+
 #print sorted_lst
