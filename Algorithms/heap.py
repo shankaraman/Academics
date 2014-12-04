@@ -14,7 +14,8 @@ def siftdown(lst, start, end):
   root = start
   while True:
     child = root * 2 + 1
-    if child > end: break
+    if child > end: 
+        break
     if child + 1 <= end and lst[child] < lst[child + 1]:
       child += 1
     if lst[root] < lst[child]:
