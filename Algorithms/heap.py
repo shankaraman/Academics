@@ -1,6 +1,5 @@
 import random
 def heapsort(lst):
-  ''' Heapsort. Note: this function sorts in-place (it mutates the list). '''
  
   # in pseudo-code, heapify only called once, so inline it here
   for start in range((len(lst)-2)/2, -1, -1):
